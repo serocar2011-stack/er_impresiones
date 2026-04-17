@@ -1,0 +1,104 @@
+
+.titulos-print {
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    background-color: whitesmoke;
+    filter: drop-shadow(2px 4px 6px black);
+    padding: 5px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.carga-archivos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0px;
+    gap: 10px;
+}
+.files{
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+
+}
+
+.file-name{
+    font-size: 10px;
+    padding: 1px;
+}
+
+
+
+section select{
+    height: 40px;
+}
+
+section form{
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: larger;
+    margin: 0px;
+}
+
+section form input{
+    font-size: larger;
+    z-index: 0;
+   }
+
+
+
+::-webkit-file-upload-button{
+    background-color: violet;
+    border-radius: 5px;
+}
+
+::-webkit-file-upload-button:hover{
+    background-color: pink;
+}
+
+.button-action{
+    font-size: 15px;
+     background-color: violet;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+     position: relative;
+    z-index: 10;
+}
+
+.button-action:hover{
+    background-color: red;
+}
+
+.datos-cliente{
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+
+}
+
+.datos{
+    width: 40vw;
+    font-size: 18px;
+}
+
+
+/* responsive */
+
+
+@media(max-width: 660px){
+    .files{
+        font-size: 4vw;
+    }}
+
+@media(max-width: 800px){
+    .carga-archivos{
+        flex-direction: column;
+    }}

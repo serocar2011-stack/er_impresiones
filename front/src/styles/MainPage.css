@@ -1,0 +1,54 @@
+ @import url('https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Cookie&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+ .img-container{
+    display: flex;
+    justify-content: space-around;
+}
+ 
+   
+ .imagen-portada{
+    width: 85vw;
+    margin-top: 30px;
+    margin-bottom: 20px;
+   border: 2px solid black;
+    filter: drop-shadow(2px 4px 6px black);
+    z-index: 0;
+
+       }
+
+       .imagen-portada:hover{
+        scale: 1.1;
+        transition-duration: 1.5s;
+       }
+
+       .logo_superpuesto{
+        position: absolute;
+        padding: 60px 0;
+        z-index: 1;
+        width: 20vw;
+        opacity: 0.7;
+            }
+
+
+
+
+ .logo_superpuesto:hover{
+    transform: rotate(360deg);
+    animation-iteration-count:  infinite;
+    transition-duration: 5s ;
+ }
+
+ .title{
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   font-size: larger;
+   font-weight: 1000;
+
+}
+
+
+.comic-relief-regular {
+  font-family: "Comic Relief", system-ui;
+  font-weight: 600;
+  font-style: normal;
+}

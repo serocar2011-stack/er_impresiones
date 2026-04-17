@@ -1,0 +1,42 @@
+
+
+.galery-wrapper{
+    margin: 50px;
+}
+
+
+.galeria{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 100px;
+    align-items: center;
+}
+
+
+.img_previsualizacion:hover{
+    scale: 1.1;
+}
+
+div ul li  a img{
+    width: 10vw;
+    border: 2px solid black;
+}
+
+/* responsive */
+
+ @media(max-width: 1100px){
+    div ul li a img {
+      width: 25vw;
+    }}
+
+    
+ 
+    @media(max-width: 800px){
+    div ul li a img {
+      width: 50vw;
+    }}
+
+    
+ 

@@ -14,7 +14,7 @@ export function useProducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(API_URL);
+        const res = await fetch(`${API_URL}/products`);
         if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
 
         const data = await res.json();
@@ -32,7 +32,7 @@ export function useProducts() {
   
   const addProduct = async (newProduct) => {
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_URL}/products`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newProduct),

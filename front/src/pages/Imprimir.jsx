@@ -3,6 +3,7 @@ import DatosCliente from '../components/DatosCliente';
 import useFileInputs from '../hooks/useFileImput';
 import "../styles/Print.css"
 import { useState } from 'react';
+import { API_URL } from '../config';
 
 function Imprimir() {
 
@@ -16,36 +17,72 @@ function Imprimir() {
   /* pedido */
   const [pedido, setPedido] = useState({
     nombre: "",
+    apellido: "",
     telefono: "",
     email: "",
-    archivos: []
   });
 
-  const handleConfirmacion = () => {
+  const handleConfirmacion = async () => {
 
-    if (!pedido.nombre.trim() || !pedido.email.trim()) {
-      alert("Completar datos!");
+    if (!pedido.nombre.trim() || !pedido.apellido.trim() || !pedido.email.trim() || !pedido.telefono.trim()) {
+      alert("Completar todos los datos del cliente!");
       return;
     }
 
-    /* pedido completo */
+    if (fileInputs.length === 0 || !fileInputs[0].fileName) {
+      alert("Debes agregar al menos un archivo!");
+      return;
+    }
+
+    /* Preparar payload para la API */
     const pedidoFinal = {
-      ...pedido,
-      archivos: fileInputs
+      cliente: {
+        nombre: pedido.nombre,
+        apellido: pedido.apellido,
+        email: pedido.email,
+        telefono: pedido.telefono
+      },
+      files: fileInputs.map(item => ({
+        fileName: item.fileName,
+        fileUrl: "http://dummy-url.com/" + item.fileName, // TODO: Implement actual file upload
+        pages: item.pages || 0,
+        color: item.color,
+        faz: item.faz
+      }))
     };
 
-    /* Guardar en localStorage como JSON */
-    localStorage.setItem("pedido", JSON.stringify(pedidoFinal));
+    try {
+      const response = await fetch(`${API_URL}/fullprintjobs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pedidoFinal)
+      });
 
-    alert("Pedido enviado");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error al enviar el pedido');
+      }
 
-    /* Reiniciar todo */
-    setPedido({
-      nombre: "",
-      telefono: "",
-      email: "",
-      archivos: []
-    });
+      const data = await response.json();
+      console.log('Pedido enviado con éxito:', data);
+      alert("Pedido enviado correctamente!");
+
+      /* Reiniciar todo */
+      setPedido({
+        nombre: "",
+        apellido: "",
+        telefono: "",
+        email: "",
+      });
+      // Note: useFileInputs might need a reset method, but for now we'll just reload or the user can manual reset
+      window.location.reload(); 
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert("Hubo un error al enviar el pedido: " + error.message);
+    }
   };
 
   return (

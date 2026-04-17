@@ -22,8 +22,18 @@ function DatosCliente({ pedido, setPedido }) {
           type="text"
           id="nombre"
           name="nombre"
-          autoComplete="name"       // ← agregado
+          autoComplete="given-name"
           value={pedido.nombre}
+          onChange={handleChange}
+        />
+
+        <label htmlFor="apellido">APELLIDO</label>
+        <input
+          type="text"
+          id="apellido"
+          name="apellido"
+          autoComplete="family-name"
+          value={pedido.apellido || ""}
           onChange={handleChange}
         />
 

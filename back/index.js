@@ -1,5 +1,6 @@
 import "dotenv/config"
 import express from "express"
+import cors from "cors"
 import { PORT } from "./src/config/config.js"
 import { connectDB } from "./src/config/db.js"
 import productRouter from "./src/routes/productRoutes.js"
@@ -14,7 +15,7 @@ import fullPrintJobRouter from "./src/routes/fullPrintJobRoutes.js"
 
 const app = express()
 
-
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -32,6 +33,10 @@ app.use("/api/user", userRouter)
 
 app.use(handleError)
 
-app.listen(PORT, () => {
-  console.log(`Server is running in port ${PORT}`)
-})
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running in port ${PORT}`)
+  })
+}
+
+export default app

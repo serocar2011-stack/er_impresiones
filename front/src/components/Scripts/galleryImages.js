@@ -1,7 +1,7 @@
 import agendas from "../../assets/img/GALERIA/agendas.jpg";
-import cuadernos from "../../assets/img/GALERIA/cuadernitos.jpeg";
+import cuadernos from "../../assets/img/GALERIA/cuadernitos.JPEG";
 import kitempr from "../../assets/img/GALERIA/kit_emprendedor.jpg";
-import kamba from "../../assets/img/GALERIA/kamba_kau.jpeg";
+import kamba from "../../assets/img/GALERIA/kamba_kau.JPEG";
 
 export const galleryImages = [
   { src: agendas, alt: "agenda" },

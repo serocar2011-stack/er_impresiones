@@ -4,6 +4,7 @@ import {
   getAllFilesService,
   deleteFileService
 } from "../services/fileService.js"
+import { put } from '@vercel/blob';
 
 export const createFileController = async (req, res, next) => {
   try {
@@ -56,3 +57,20 @@ export const deleteFileController = async (req, res, next) => {
     next(error)
   }
 }
+
+export const uploadFileController = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No se proporcionó ningún archivo" });
+    }
+
+    const { originalname, buffer } = req.file;
+    const blob = await put(originalname, buffer, {
+      access: 'public',
+    });
+
+    res.status(200).json({ url: blob.url });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -34,24 +34,47 @@ function Imprimir() {
       return;
     }
 
-    /* Preparar payload para la API */
-    const pedidoFinal = {
-      cliente: {
-        nombre: pedido.nombre,
-        apellido: pedido.apellido,
-        email: pedido.email,
-        telefono: pedido.telefono
-      },
-      files: fileInputs.map(item => ({
-        fileName: item.fileName,
-        fileUrl: "http://dummy-url.com/" + item.fileName, // TODO: Implement actual file upload
-        pages: item.pages || 0,
-        color: item.color,
-        faz: item.faz
-      }))
-    };
-
     try {
+      // Subir archivos primero
+      const uploadedFiles = await Promise.all(fileInputs.map(async (item) => {
+        if (!item.file) {
+          throw new Error("Falta archivo en una de las selecciones");
+        }
+
+        const formData = new FormData();
+        formData.append("file", item.file);
+
+        const uploadRes = await fetch(`${API_URL}/files/upload`, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!uploadRes.ok) {
+          throw new Error("Error al subir archivo " + item.fileName);
+        }
+
+        const uploadData = await uploadRes.json();
+
+        return {
+          fileName: item.fileName,
+          fileUrl: uploadData.url,
+          pages: item.pages || 0,
+          color: item.color,
+          faz: item.faz
+        };
+      }));
+
+      /* Preparar payload para la API */
+      const pedidoFinal = {
+        cliente: {
+          nombre: pedido.nombre,
+          apellido: pedido.apellido,
+          email: pedido.email,
+          telefono: pedido.telefono
+        },
+        files: uploadedFiles
+      };
+
       const response = await fetch(`${API_URL}/fullprintjobs`, {
         method: 'POST',
         headers: {

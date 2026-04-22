@@ -1,13 +1,18 @@
 import { Router } from "express"
+import multer from "multer"
 
 import {
   createFileController,
   getFilesByPrintJobController,
-  deleteFileController, getAllFilesController
+  deleteFileController, getAllFilesController, uploadFileController
 } from "../controllers/fileController.js"
 import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware.js"
 
 const router = Router()
+const upload = multer({ storage: multer.memoryStorage() })
+
+// subir archivo a Vercel Blob
+router.post("/upload", upload.single("file"), uploadFileController)
 
 // crear archivo
 router.post("/", createFileController)

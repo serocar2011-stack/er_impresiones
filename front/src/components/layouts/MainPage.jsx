@@ -1,6 +1,10 @@
 import "../../styles/MainPage.css"
 
 
+import impresora from "../../assets/img/impresora.png"
+import logo from "../../assets/img/logo.png"
+import videoFile from "../../assets/video/Mi video.mp4"
+
 function MainPage () {
 
 return (
@@ -9,9 +13,9 @@ return (
     
     <div className="img-container">
 
-        <img className="imagen-portada" src="src/assets/img/impresora.png" alt="portada" />
+        <img className="imagen-portada" src={impresora} alt="portada" />
 
-        <img className="logo_superpuesto" src="src/assets/img/logo.png" alt="logo superpuesto" />
+        <img className="logo_superpuesto" src={logo} alt="logo superpuesto" />
     </div>
     
     
@@ -31,7 +35,7 @@ return (
     </ol>
     </section>
     <article>
-           <video src="src/assets/video/Mi video.mp4"controls width="280" height="500">video</video>
+           <video src={videoFile} controls width="280" height="500">video</video>
  </article>
 <h6 className="comic-relief-regular">CONSULTANOS POR OTROS TRABAJOS</h6>
 <h6 className="comic-relief-regular">LA MEJOR CALIDAD AL MEJOR PRECIO</h6>    

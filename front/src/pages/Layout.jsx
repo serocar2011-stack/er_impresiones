@@ -1,8 +1,8 @@
 
 import React from 'react'
-import Header from "../components/Layouts/Header"
-import Nav from "../components/Layouts/Nav"
-import Footer from "../components/Layouts/Footer"
+import Header from "../components/layouts/Header"
+import Nav from "../components/layouts/Nav"
+import Footer from "../components/layouts/Footer"
 import { Outlet } from 'react-router-dom'
 
 function Layout() {

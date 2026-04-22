@@ -1,5 +1,5 @@
 import React from 'react'
-import Gallery from "../components/Layouts/Gallery"
+import Gallery from "../components/layouts/Gallery"
 
 
 function Galeria() {

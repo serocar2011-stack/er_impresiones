@@ -1,4 +1,4 @@
-import MainPage from "../components/Layouts/MainPage"
+import MainPage from "../components/layouts/MainPage"
 
 function Home() {
   return (

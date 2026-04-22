@@ -15,12 +15,12 @@ function Store() {
       <article className="store-container">
         {products.map((item) => (
           <ProductCard
-            key={item.id}
-            title={item.title}
-            img={item.img}
-            alt={item.alt}
+            key={item._id}
+            title={item.name}
+            img={item.image || "https://via.placeholder.com/150"}
+            alt={item.name}
             description={item.description}
-            price={item.price}
+            price={item.finalPrice ? item.finalPrice : item.price}
           />
         ))}
       </article>

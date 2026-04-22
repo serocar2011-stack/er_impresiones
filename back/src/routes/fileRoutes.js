@@ -5,6 +5,7 @@ import {
   getFilesByPrintJobController,
   deleteFileController, getAllFilesController
 } from "../controllers/fileController.js"
+import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware.js"
 
 const router = Router()
 
@@ -12,11 +13,11 @@ const router = Router()
 router.post("/", createFileController)
 
 // traer archivos de un trabajo
-router.get("/", getAllFilesController)
+router.get("/", verifyTokenMiddleware, getAllFilesController)
 
-router.get("/printjob/:printJobId", getFilesByPrintJobController)
+router.get("/printjob/:printJobId", verifyTokenMiddleware, getFilesByPrintJobController)
 
 // borrar archivo
-router.delete("/:id", deleteFileController)
+router.delete("/:id", verifyTokenMiddleware, deleteFileController)
 
 export default router

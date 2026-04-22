@@ -1,5 +1,5 @@
+import "dotenv/config"
 import express from "express"
-import cors from "cors"
 import { PORT } from "./src/config/config.js"
 import { connectDB } from "./src/config/db.js"
 import productRouter from "./src/routes/productRoutes.js"
@@ -15,12 +15,7 @@ import fullPrintJobRouter from "./src/routes/fullPrintJobRoutes.js"
 const app = express()
 
 
-app.use(cors())
 app.use(express.json())
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  next();
-});
 app.use(express.urlencoded({ extended: true }))
 
 

@@ -4,13 +4,14 @@ import {createClienteController,
   getAllClientesController, 
   updateClienteController
 } from "../controllers/clienteController.js"
+import { verifyTokenMiddleware } from "../middlewares/verifyTokenMiddleware.js"
 
 const router = Router()
 
 router.post("/", createClienteController)
-router.get("/", getAllClientesController)
-router.patch("/:id", updateClienteController)
-router.delete("/:id", deleteClienteController)
+router.get("/", verifyTokenMiddleware, getAllClientesController)
+router.patch("/:id", verifyTokenMiddleware, updateClienteController)
+router.delete("/:id", verifyTokenMiddleware, deleteClienteController)
 
 
 export default router

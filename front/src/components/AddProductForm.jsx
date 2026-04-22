@@ -5,11 +5,12 @@ import "../styles/Store.css"
 function AddProductForm({ onAddProduct }) {
 
   const [newProduct, setNewProduct] = useState({
-    title: '',
+    name: '',
     description: '',
     price: 0,
-    img: '',
-    alt: ''
+    image: '',
+    quantity: 1,
+    status: 'AVAILABLE',
   });
 
   const handleChange = (e) => {
@@ -23,25 +24,25 @@ function AddProductForm({ onAddProduct }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (newProduct.title && newProduct.price > 0) {
+    if (newProduct.name && newProduct.price > 0) {
 
       onAddProduct({
         ...newProduct,
-        id: Date.now(),
       });
 
        alert(`Producto cargado!`);
 
       setNewProduct({
-        title: '',
+        name: '',
         description: '',
         price: 0,
-        img: '',
-        alt: ''
+        image: '',
+        quantity: 1,
+        status: 'AVAILABLE',
       });
 
     } else {
-      alert('El título y el precio son obligatorios.');
+      alert('El nombre y el precio son obligatorios.');
     }
   };
 
@@ -50,12 +51,11 @@ function AddProductForm({ onAddProduct }) {
       <div className='new-product-wrapper'>
         
         <label className='new-product-imput'>
-          Título:
+          Nombre:
           <input
-            
             type="text"
-            name="title"
-            value={newProduct.title}
+            name="name"
+            value={newProduct.name}
             onChange={handleChange}
             required
           />
@@ -84,21 +84,36 @@ function AddProductForm({ onAddProduct }) {
         </label>
 
         <label>
-          URL de Imagen:
+          Cantidad:
           <input
-            type="text"
-            name="img"
-            value={newProduct.img}
+            type="number"
+            name="quantity"
+            value={newProduct.quantity}
             onChange={handleChange}
+            min="1"
+            required
           />
         </label>
 
         <label>
-          Texto Alternativo (Alt):
+          Estado:
+          <select
+            name="status"
+            value={newProduct.status}
+            onChange={handleChange}
+          >
+            <option value="AVAILABLE">Disponible</option>
+            <option value="NOT AVAILABLE">No disponible</option>
+            <option value="DISCONTINUED">Discontinuado</option>
+          </select>
+        </label>
+
+        <label>
+          URL de Imagen:
           <input
             type="text"
-            name="alt"
-            value={newProduct.alt}
+            name="image"
+            value={newProduct.image}
             onChange={handleChange}
           />
         </label>

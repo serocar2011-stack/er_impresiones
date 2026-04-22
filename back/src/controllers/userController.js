@@ -1,8 +1,7 @@
 import { createUserService, getUserService, updateUserService, deleteUserService, validateUserService } from "../services/userService.js"
 
-// ==========================
-// CREATE USER
-// ==========================
+/*crear usuario*/
+
 export const createUser = async (req, res, next) => {
     try {
         const userData = req.body
@@ -14,9 +13,8 @@ export const createUser = async (req, res, next) => {
     }
 }
 
-// ==========================
-// GET USERS
-// ==========================
+/*traer usuario*/
+
 export const getUser = async (req, res, next) => {
     try {
         const users = await getUserService()
@@ -27,9 +25,8 @@ export const getUser = async (req, res, next) => {
     }
 }
 
-// ==========================
-// UPDATE USER
-// ==========================
+/*modificar usuario*/
+
 export const updateUser = async (req, res, next) => {
     try {
         const { id } = req.params
@@ -42,9 +39,8 @@ export const updateUser = async (req, res, next) => {
     }
 }
 
-// ==========================
-// DELETE USER
-// ==========================
+/*borrar usuario*/
+
 export const deleteUser = async (req, res, next) => {
     try {
         const { id } = req.params
@@ -56,9 +52,8 @@ export const deleteUser = async (req, res, next) => {
     }
 }
 
-// ==========================
-// LOGIN / VALIDATE USER
-// ==========================
+/*login*/
+
 export const validateUser = async (req, res, next) => {
     try {
         const userData = req.body

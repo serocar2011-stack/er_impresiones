@@ -9,10 +9,9 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const userEmail = localStorage.getItem('userEmail');
     if (token) {
-      // For now, we'll just assume the token is valid if it exists
-      // In a real app, you might want to verify it with the backend
-      setUser({ token });
+      setUser({ token, email: userEmail });
     }
     setLoading(false);
   }, []);
@@ -32,7 +31,8 @@ export const AuthProvider = ({ children }) => {
 
       const data = await response.json();
       localStorage.setItem('token', data.token);
-      setUser({ token: data.token });
+      localStorage.setItem('userEmail', data.user);
+      setUser({ token: data.token, email: data.user });
       return data;
     } catch (error) {
       throw error;
@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userEmail');
     setUser(null);
   };
 

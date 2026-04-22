@@ -33,10 +33,10 @@ const AdminLibreria = () => {
         <tbody>
           {products.map(product => (
             <tr key={product._id || product.id}>
-              <td><img src={product.img} alt={product.title} width="50" /></td>
-              <td>{product.title}</td>
+              <td><img src={product.image} alt={product.name} width="50" /></td>
+              <td>{product.name}</td>
               <td>{product.description}</td>
-              <td>${product.price}</td>
+              <td>${product.finalPrice ? Number(product.finalPrice).toFixed(2) : product.price}</td>
               <td>
                 <button className="edit-button">Editar</button>
                 <button className="delete-button">Eliminar</button>

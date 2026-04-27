@@ -50,7 +50,8 @@ function Imprimir() {
         });
 
         if (!uploadRes.ok) {
-          throw new Error("Error al subir archivo " + item.fileName);
+          const errorData = await uploadRes.json().catch(() => ({}));
+          throw new Error(errorData.message || "Error al subir archivo " + item.fileName);
         }
 
         const uploadData = await uploadRes.json();

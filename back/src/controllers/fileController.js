@@ -65,7 +65,13 @@ export const uploadFileController = async (req, res, next) => {
     }
 
     const { originalname, buffer } = req.file;
-    const blob = await put(originalname, buffer, {
+
+    // Sanitizar el nombre del archivo: reemplazar espacios por guiones bajos y eliminar caracteres especiales
+    const sanitizedName = originalname
+      .replace(/\s+/g, '_')
+      .replace(/[^a-zA-Z0-9._-]/g, '');
+
+    const blob = await put(sanitizedName, buffer, {
       access: 'public',
     });
 

@@ -41,6 +41,13 @@ function Imprimir() {
           throw new Error("Falta archivo en una de las selecciones");
         }
 
+        // Check file size (4.5MB limit for Vercel Hobby)
+        const MAX_SIZE = 4.5 * 1024 * 1024;
+        if (item.file.size > MAX_SIZE) {
+           throw new Error(`El archivo ${item.fileName} es muy grande (${(item.file.size / (1024 * 1024)).toFixed(2)}MB). El limite es 4.5MB.`);
+        }
+
+        console.log(`Subiendo archivo a: ${API_URL}/files/upload`);
         const formData = new FormData();
         formData.append("file", item.file);
 
@@ -50,8 +57,15 @@ function Imprimir() {
         });
 
         if (!uploadRes.ok) {
-          const errorData = await uploadRes.json().catch(() => ({}));
-          throw new Error(errorData.message || "Error al subir archivo " + item.fileName);
+          let errorMsg = `Status: ${uploadRes.status}`;
+          try {
+            const errorData = await uploadRes.json();
+            errorMsg = errorData.message || errorMsg;
+          } catch (e) {
+            const text = await uploadRes.text().catch(() => "");
+            if (text) errorMsg += ` - ${text.substring(0, 100)}`;
+          }
+          throw new Error(`Error al subir archivo ${item.fileName}: ${errorMsg}`);
         }
 
         const uploadData = await uploadRes.json();
